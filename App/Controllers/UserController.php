@@ -15,8 +15,7 @@ class UserController
 
     public function index()
     {
-        $users = $this->userModel->getAll();
-        include __DIR__ . '/../../Views/UserList.php';
+        header('Location:' . 'App/Views/Home.php');
     }
 
     public function register()
@@ -29,8 +28,16 @@ class UserController
 
             $auth = new Auth();
             $auth->handleRegistration($name, $email, $password, $confirm_password);
+            header('Location:'. __DIR__ .'/../../Views/Login.php');
         } else {
-            include __DIR__ . '/../../Views/Register.html';
+            include __DIR__ . '/../../Views/Register.php';
+        }
+    }
+
+    public function login() 
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            
         }
     }
 

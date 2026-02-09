@@ -22,7 +22,7 @@
       </div>
 
       <!-- Form -->
-      <form class="space-y-5" action="index.php?action=register" method="POST">
+      <form class="space-y-5" action="../Public/Index.php?action=register" method="POST">
 
         <div>
           <label class="block text-sm font-medium text-neutral-700 mb-1">
@@ -30,6 +30,7 @@
           </label>
           <input
             type="text"
+            name="name"
             placeholder="John Doe"
             class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-neutral-600 focus:border-neutral-900"
           />
@@ -41,6 +42,7 @@
           </label>
           <input
             type="email"
+            name="email"
             placeholder="you@example.com"
             class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-neutral-600 focus:border-neutral-900"
           />
@@ -52,6 +54,7 @@
           </label>
           <input
             type="password"
+            name="password"
             placeholder="••••••••"
             class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-neutral-600 focus:border-neutral-900"
           />
@@ -62,7 +65,8 @@
             Confirm Password
           </label>
           <input
-            type="confirm_password"
+            type="password"
+            name="confirm_password"
             placeholder="••••••••"
             class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-neutral-600 focus:border-neutral-900"
           />
@@ -81,7 +85,7 @@
       <!-- Footer -->
       <p class="mt-6 text-center text-sm text-neutral-500">
         Already have an account?
-        <a href="#" class="font-medium text-neutral-900 hover:underline">
+        <a href="Login.php" class="font-medium text-neutral-900 hover:underline">
           Sign in
         </a>
       </p>

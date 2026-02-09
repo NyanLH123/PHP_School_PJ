@@ -15,11 +15,14 @@ spl_autoload_register(function ($class) {
 use App\Controllers\UserController;
 
 $controller = new UserController();
-$action = $_GET['action'] ?? 'list';
+$action = $_GET['action'] ?? 'index';
 
 switch ($action) {
     case 'register':
         $controller->register();
+        break;
+    case 'login':
+        $controller->login();
         break;
     default:
         $controller->index();

@@ -1,7 +1,5 @@
 <?php
 namespace App\Models;
-
-use App\Config\Database;
 use App\Models\User;
 
 class Auth {
@@ -22,6 +20,15 @@ class Auth {
                 }
                 return $result;
             }
+        }
+    }
+
+    public function hnadleLogin($email) {
+        $userModel = new User();
+        if (!$userModel->emailExists($email)) {
+            echo "<scrip>window.alert('User not found')</scrip>";
+        } else {
+
         }
     }
 }
