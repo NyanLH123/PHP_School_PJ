@@ -1,39 +1,20 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Config;
 
-use PDO;
-use PDOException;
-
-class Database {
-    private static $instance = null;
-    private $conn;
-
-    private function __construct() {
-        $host = 'localhost';
-        $db_name = 'l5dc';
-        $username = 'root';
-        $password = '';
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ];
-        
-
-        try {
-            $this->conn = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8", $username, $password, $options);
-        } catch (PDOException $e) {
-            die("Database connection failed: " . $e->getMessage());
-        }
-    }
-
-    public static function getInstance() {
-        if (self::$instance === null) {
-            self::$instance = new Database();
-        }
-        return self::$instance;
-    }
-
-    public function getConnection() {
-        return $this->conn;
-    }
+/**
+ * Legacy compatibility file.
+ * Use App\Config\Config for active DB configuration.
+ */
+class Database
+{
+    public const HOST = Config::DB_HOST;
+    public const PORT = Config::DB_PORT;
+    public const NAME = Config::DB_NAME;
+    public const USER = Config::DB_USER;
+    public const PASS = Config::DB_PASS;
+    public const CHARSET = Config::DB_CHARSET;
 }
+

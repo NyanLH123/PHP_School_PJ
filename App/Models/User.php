@@ -1,41 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use App\Config\Database;
+use App\Core\BaseModel;
 
-class User
+class User extends BaseModel
 {
-    private $conn;
-
-    public function __construct()
+    public function create(string $name, string $email, string $passwordHash): bool
     {
-        $database = Database::getInstance();
-        $this->conn = $database->getConnection();
+        $sql = 'INSERT INTO users (name, email, password, created_at, updated_at)
+                VALUES (:name, :email, :password, NOW(), NOW())';
+
+        return $this->query($sql, [
+            'name' => $name,
+            'email' => $email,
+            'password' => $passwordHash,
+        ])->rowCount() > 0;
     }
 
-    public function getAll()
+    public function findByEmail(string $email): ?array
     {
-        $stmt = $this->conn->query("SELECT * FROM users");
-        return $stmt->fetchAll();
+        $sql = 'SELECT id, name, email, password FROM users WHERE email = :email LIMIT 1';
+        $user = $this->query($sql, ['email' => $email])->fetch();
+
+        return $user ?: null;
     }
 
-    public function emailExists($email)
+    public function findById(int $id): ?array
     {
-        $stmt = $this->conn->prepare(
-            "SELECT 1 FROM users WHERE email = ? LIMIT 1"
-        );
-        $stmt->execute([$email]);
-        return $stmt->fetch() !== false;
-    }
+        $sql = 'SELECT id, name, email FROM users WHERE id = :id LIMIT 1';
+        $user = $this->query($sql, ['id' => $id])->fetch();
 
-    public function create($name, $email, $password)
-    {
-        $stmt = $this->conn->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
-        return $stmt->execute([
-            ':name' => $name,
-            ':email' => $email,
-            ':password' => password_hash($password, PASSWORD_BCRYPT)
-        ]);
+        return $user ?: null;
     }
 }
+

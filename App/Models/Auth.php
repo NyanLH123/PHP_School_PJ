@@ -1,34 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Models;
-use App\Models\User;
 
-class Auth {
-    public function handleRegistration($name, $email, $password, $confirm_password)
-    {
-        if ($password !== $confirm_password) {
-            echo "Passwords do not match.";
-            return false;
-        } else {
-            $userModel = new User();
-            if ($userModel->emailExists($email)) {
-                echo "Email already exists.";
-                return false;
-            } else {
-                $result = $userModel->create($name, $email, $password);
-                if ($result) {
-                    echo "User registered successfully.";
-                }
-                return $result;
-            }
-        }
-    }
-
-    public function hnadleLogin($email) {
-        $userModel = new User();
-        if (!$userModel->emailExists($email)) {
-            echo "<scrip>window.alert('User not found')</scrip>";
-        } else {
-
-        }
-    }
+/**
+ * Legacy compatibility model.
+ * Authentication flow is handled by UserController + Session.
+ */
+class Auth extends User
+{
 }
+
